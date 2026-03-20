@@ -1,12 +1,15 @@
+// Kas ei oleks parem hoopis siin hoida ostukorvi loogikat, mitte app.js-is?
+
 import { createContext, useEffect } from "react";
 
 const CartContext = createContext({
 	items: [],
 	cartItemsCount: 0,
 	addItem: () => {},
+	clearCart: () => {},
 });
 
-export const CartContextProvider = ({ children, items, addItem }) => {
+export const CartContextProvider = ({ children, items, addItem, clearCart }) => {
 	useEffect(() => {
 		console.log("Cart updated:", items);
 	}, [items]);
@@ -16,7 +19,7 @@ export const CartContextProvider = ({ children, items, addItem }) => {
 	}, 0);
 
 	return (
-		<CartContext.Provider value={{ items, cartItemsCount, addItem }}>
+		<CartContext.Provider value={{ items, cartItemsCount, addItem, clearCart }}>
 			{children}
 		</CartContext.Provider>
 	);
